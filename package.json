@@ -1,28 +1,27 @@
 {
-  "name": "temanawaocambridge",
-  "version": "1.0.0",
-  "description": "Website for Te Manawa o Cambridge Trust",
-  "main": "index.js",
+  "name": "vuetify-spa",
+  "version": "0.0.0",
   "scripts": {
-    "test": "test"
+    "dev": "vite --port 3001",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint --fix --ext .js,.vue src"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/temanawaocambridge/website.git"
+  "dependencies": {
+    "@mdi/font": "7.0.96",
+    "eslint-config-vuetify": "^1.0.0",
+    "roboto-fontface": "*",
+    "vue": "^3.4.0",
+    "vuetify": "^3.5.11"
   },
-  "keywords": [
-    "Community",
-    "Charitable",
-    "Trust",
-    "Cambridge",
-    "New",
-    "Zealand",
-    "Website"
-  ],
-  "author": "Cherese Eriepa",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/temanawaocambridge/website/issues"
-  },
-  "homepage": "https://github.com/temanawaocambridge/website#readme"
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.23.0",
+    "sass": "^1.71.1",
+    "unplugin-fonts": "^1.1.1",
+    "unplugin-vue-components": "^0.26.0",
+    "vite": "^5.1.5",
+    "vite-plugin-vuetify": "^2.0.3"
+  }
 }
