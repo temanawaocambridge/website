@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar>
+  <v-app-bar elevation=0>
     <template #title>
       <div class="d-inline-flex align-center text-h4 font-weight-bold my-5 text-primary">
         <v-img src="/assets/logo.png" start width="60px" />

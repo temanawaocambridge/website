@@ -19,7 +19,7 @@
         rounded
         text="Learn More"
         width="128"
-        to="/about"
+        href="#about"
       />
 
       <v-btn
@@ -29,10 +29,11 @@
         height="55"
         rounded
         width="128"
-        to="/contact"
+        href="#contact"
       >
         Contact Us
       </v-btn>
+      
     </div>
   </v-sheet>
 </template>

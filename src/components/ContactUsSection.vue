@@ -2,6 +2,7 @@
   <v-sheet
     class="text-center py-16"
     color="primary"
+    id="contact"
   >
     <div class="text-white text-h4 font-weight-medium">
       Get in Touch with Us
@@ -76,6 +77,7 @@
       flat
       height="55"
       text="Send Message"
+      @click="alert('not implemented')"
     />
   </v-sheet>
 </template>
