@@ -11,7 +11,7 @@
             What Our Community Says
           </div>
 
-          <div class="text-body-1 text-medium-emphasis mt-5">
+          <div class="text-body-1 text-medium-white mt-5">
             Hear directly from those we’ve had the pleasure of assisting. Their stories and feedback inspire and guide our work.
           </div>
         </v-col>

@@ -32,7 +32,7 @@
               </template>
 
               <template #subtitle>
-                <span class="text-body-1 text-grey-darken-3">{{ item.subtitle }}</span>
+                <span class="text-body-1 text-white-darken-3">{{ item.subtitle }}</span>
               </template>
             </v-list-item>
           </v-list>

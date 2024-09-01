@@ -25,7 +25,7 @@
 
       <AmazingFeaturesSection />
 
-      <DonationSection />
+      <!-- <DonationSection /> -->
 
       <FAQSection />
 
