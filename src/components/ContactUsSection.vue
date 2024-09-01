@@ -72,13 +72,16 @@
     </v-container>
 
     <v-btn
-      class="px-10 text-body-1 mt-5"
-      color="accent"
-      flat
-      height="55"
-      text="Send Message"
-      @click="alert('not implemented')"
-    />
+        class="text-body-2"
+        color="accent"
+        flat
+        height="55"
+        rounded
+        width="158"
+        @click="alert('not implemented')"
+      >
+        Send Message
+      </v-btn>
   </v-sheet>
 </template>
 
@@ -90,3 +93,9 @@
     'General Question',
   ];
 </script>
+
+<style>
+#contact {
+  scroll-margin-top: 63px; /* Adjust this value according to your app-bar height */
+}
+</style>
