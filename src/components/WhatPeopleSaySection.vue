@@ -82,5 +82,7 @@
 </script>
 
 <style>
-/* Add any additional styles if needed */
+#testimonials {
+  scroll-margin-top: 63px; /* Adjust this value according to your app-bar height */
+}
 </style>

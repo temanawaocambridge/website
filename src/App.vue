@@ -2,34 +2,22 @@
   <v-app>
     <AppBar />
 
-    <v-main>
-      <LandingSection />
-
-      <LogoSection />
-
-      <WhatWeDoSection />
-
-      <DiscoverHelp />
-
-      <CustomizeSection />
-
-      <FunFactsSection />
-
-      <WhatPeopleSaySection />
-
-      <OurPortfolioSection />
-
-      <MeetOurTeamSection />
-
-      <AwardWinningSection />
-
-      <AmazingFeaturesSection />
-
-      <!-- <DonationSection /> -->
-
-      <FAQSection />
-
-      <ContactUsSection />
+    <v-main class="main-content">
+      <v-container fluid class="pa-0">
+        <LandingSection />
+        <WhatWeDoSection />
+        <DiscoverHelp />
+        <CustomizeSection />
+        <FunFactsSection />
+        <WhatPeopleSaySection />
+        <OurPortfolioSection />
+        <MeetOurTeamSection />
+        <AwardWinningSection />
+        <AmazingFeaturesSection />
+        <!-- <DonationSection id="donate" /> -->
+        <FAQSection />
+        <ContactUsSection />
+      </v-container>
     </v-main>
 
     <AppFooter />
@@ -39,3 +27,14 @@
 <script setup>
   //
 </script>
+
+<style>
+.main-content {
+  scroll-margin-top: -63px;
+}
+
+section[id] {
+  scroll-margin-top: 63px; /* Adjust this value according to your app-bar height */
+}
+
+</style>

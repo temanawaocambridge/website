@@ -78,5 +78,7 @@
 </script>
 
 <style>
-/* Add any additional styles if needed */
+#services {
+  scroll-margin-top: 63px; /* Adjust this value according to your app-bar height */
+}
 </style>

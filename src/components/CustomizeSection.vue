@@ -39,7 +39,7 @@
         </v-col>
 
         <v-col cols="12" md="5">
-          <v-img src="/assets/customize_bg.png" /> <!-- Update with relevant background image -->
+          <v-img rounded="xl" src="https://picsum.photos/seed/picsum/300/260" /> <!-- Update with relevant background image -->
         </v-col>
       </v-row>
     </v-container>

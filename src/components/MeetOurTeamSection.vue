@@ -9,14 +9,14 @@
       Meet Our Trustees
     </div>
 
-    <div class="text-body-1 text-medium-emphasis mt-5">
+    <div class="text-body-1 text-medium-white mt-5">
       Discover more about our amazing group of trustees.
     </div>
 
     <v-container>
       <v-row>
         <v-col
-          v-for="person in team"
+          v-for="(person, i) in team"
           :key="person.name"
           class="pa-5"
           cols="12"
@@ -28,7 +28,7 @@
           >
             <v-img
               class="w-100 rounded-t-xl"
-              :src="person.image"
+              :src="`https://picsum.photos/400/400?image=${i * 20}`"
             />
 
             <div class="mt-3 text-body-1">
@@ -95,3 +95,9 @@
     },
   ]
 </script>
+
+<style>
+#trustees {
+  scroll-margin-top: 63px; /* Adjust this value according to your app-bar height */
+}
+</style>

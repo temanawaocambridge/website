@@ -82,3 +82,9 @@
     </v-container>
   </v-sheet>
 </template>
+
+<style>
+#donations {
+  scroll-margin-top: 63px; /* Adjust this value according to your app-bar height */
+}
+</style>
