@@ -11,6 +11,7 @@
   "dependencies": {
     "@mdi/font": "7.0.96",
     "eslint-config-vuetify": "^1.0.0",
+    "pexels": "^1.4.0",
     "roboto-fontface": "*",
     "vue": "^3.4.0",
     "vuetify": "^3.5.11"

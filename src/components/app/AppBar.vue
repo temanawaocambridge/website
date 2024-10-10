@@ -4,7 +4,7 @@
     <template #title>
       <div
         class="d-inline-flex align-center my-5"
-        :class="[$vuetify.display.smAndDown ? 'text-h6' : 'text-h4', 'font-weight-bold text-primary']"
+        :class="[$vuetify.display.smAndDown ? 'text-h6' : 'text-h4', 'text-primary']"
       >
         <v-img
           src="/assets/logo.png"
@@ -68,13 +68,13 @@ import { useGoTo } from 'vuetify';
 
 const drawer = ref(false);
 const menu = [
-  'Home',
-  'About',
+  // 'Home',
+  // 'About',
   // 'Testimonials',
   // 'Mahi',
-  'Trustees',
-  'Services',
-  'Contact'
+  // 'Trustees',
+  // 'Services',
+  // 'Contact'
   // 'Donate',
 ];
 

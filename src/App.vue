@@ -5,28 +5,27 @@
     <v-main class="main-content">
       <v-container fluid class="pa-0">
         <LandingSection />
-        <WhatWeDoSection />
-        <DiscoverHelp />
-        <CustomizeSection />
-        <FunFactsSection />
-        <WhatPeopleSaySection />
-        <OurPortfolioSection />
-        <MeetOurTeamSection />
-        <AwardWinningSection />
-        <AmazingFeaturesSection />
+
+        <ShortcutSection/>
+        
+        <!-- <WhatWeDoSection /> -->
+        <!-- <DiscoverHelp /> -->
+        <!-- <CustomizeSection /> -->
+        <!-- <FunFactsSection /> -->
+        <!-- <WhatPeopleSaySection /> -->
+        <!-- <OurPortfolioSection /> -->
+        <!-- <MeetOurTeamSection /> -->
+        <!-- <AwardWinningSection /> -->
+        <!-- <AmazingFeaturesSection /> -->
         <!-- <DonationSection id="donate" /> -->
-        <FAQSection />
-        <ContactUsSection />
+        <!-- <FAQSection /> -->
+        <!-- <ContactUsSection /> -->
       </v-container>
     </v-main>
 
     <AppFooter />
   </v-app>
 </template>
-
-<script setup>
-  //
-</script>
 
 <style>
 .main-content {

@@ -3,13 +3,23 @@
     id="home"
     class="d-flex justify-center align-center text-center flex-column"
     color="white"
-    min-height="400px"
+    min-height="30vh"
   >
     <v-img
-      class="cover-image"
-      src="https://picsum.photos/id/61/3264/1048"
+      class="cover-image d-flex align-center"
+      src="https://cdn.cambridge.co.nz/2022/05/15143536/banner-cambridge-bridge.jpg"
       cover
-    />
+      height="300px"
+    >
+
+      <v-card-title :class="{ 'text-h4': $vuetify.display.mdAndUp, 'text-h6': $vuetify.display.smAndDown, 'text-white': true }">
+        Nau Mai, Haere Mai<br>
+        Our website is<br>
+        under construction<br>
+        Coming Soon...
+      </v-card-title>
+  
+    </v-img>
   </v-sheet>
 </template>
 
