@@ -21,12 +21,11 @@ export default createVuetify({
           primary: '#28425B',
           secondary: '#2e4259',
           accent: '#9F3DA4'
-        },
-      },
-    },
-  },
+        }
+      }
+    }
+  }
 })
-
 
 /*
 color of tree: #2e4259
