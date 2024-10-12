@@ -8,6 +8,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@apollo/client": "^3.11.8",
     "@mdi/font": "7.0.96",
     "eslint-config-vuetify": "^1.0.0",
     "graphql": "^16.9.0",

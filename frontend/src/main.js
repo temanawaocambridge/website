@@ -5,7 +5,7 @@
  */
 
 // Plugins
-// import { registerPlugins } from '@/plugins'
+import { registerPlugins } from '@/plugins'
 
 // Components
 import App from './App.vue'
@@ -17,7 +17,7 @@ import store from './store'
 
 const app = createApp(App)
 
-// registerPlugins(app)
+registerPlugins(app)
 
 app.use(router)
 app.use(store)

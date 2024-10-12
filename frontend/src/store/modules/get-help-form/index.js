@@ -1,4 +1,4 @@
-// import apolloClient from '@/plugins/apollo'
+import apolloClient from '@/plugins/apollo'
 import { SUBMIT_GET_HELP_REQUEST } from './mutation'
 
 export default {
@@ -8,9 +8,6 @@ export default {
   mutations: {},
   actions: {
     async submitGetHelpRequest(_, fields) {
-      console.log('submitting', fields)
-      if (fields) return
-
       try {
         const { data } = await apolloClient.mutate({
           mutation: SUBMIT_GET_HELP_REQUEST,
