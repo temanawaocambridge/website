@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <LandingSection />
+    <Cover />
     <ShortcutSection/>
   </v-container>
 </template>

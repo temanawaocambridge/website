@@ -7,21 +7,33 @@
   >
     <v-img
       class="cover-image d-flex align-center"
-      src="https://cdn.cambridge.co.nz/2022/05/15143536/banner-cambridge-bridge.jpg"
+      :src="cover"
       cover
-      height="300px"
+      height="400px"
+      rounded
     >
-
       <v-card-title :class="{ 'text-h4': $vuetify.display.mdAndUp, 'text-h6': $vuetify.display.smAndDown, 'text-white': true }">
         Nau Mai, Haere Mai<br>
         Our website is<br>
         under construction<br>
         Coming Soon...
       </v-card-title>
-  
     </v-img>
   </v-sheet>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      cover: null
+    }
+  },
+  async mounted () {
+    this.cover = await this.$store.dispatch('pexels/fetchCoverPhoto')
+  }
+}
+</script>
 
 <style>
 #home {
