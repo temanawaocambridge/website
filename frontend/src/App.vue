@@ -3,7 +3,7 @@
     <AppBar ref="appBar" />
 
     <v-main>
-      <v-container :style="{ minHeight: contentHeight }" fluid class="pa-0">
+      <v-container fluid class="pa-0">
         <router-view />
         <!-- Uncomment additional sections as needed -->
         <!-- <WhatWeDoSection /> -->
