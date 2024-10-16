@@ -24,7 +24,7 @@ const app = express()
 // Set up CORS to allow requests from both your production website and localhost (for development)
 const allowedOrigins = [
   process.env.PRODUCTION_WEBSITE_URL,
-  `${process.env.PRODUCTION_BACKEND_URL}/graphql`,
+  `${process.env.PRODUCTION_BACKEND_URL}`,
   `http://localhost:${process.env.PORT || 4000}`,
   'http://localhost:3001' // dev website url
 ].filter(Boolean)
