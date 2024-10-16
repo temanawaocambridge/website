@@ -12,6 +12,7 @@ const resolvers = require('./graphql/resolvers')
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  path: '/',
   persistedQueries: false,
   introspection: true, // Enable introspection for Apollo Sandbox in production
   plugins: [
@@ -46,7 +47,7 @@ app.use(cors(corsOptions)) // Apply CORS middleware
 
 async function startApolloServer () {
   await server.start() // Start Apollo Server
-  server.applyMiddleware({ app }) // Apply Apollo middleware to the Express app
+  server.applyMiddleware({ app, path: '/' }) // Apply Apollo middleware to the Express app
 }
 
 // Call the function to start Apollo Server
