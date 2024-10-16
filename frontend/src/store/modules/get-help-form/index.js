@@ -38,7 +38,7 @@ export default {
 
 function convertObjectToArray (obj) {
   return Object.entries(obj).map(([key, value]) => ({
-    key: key,
-    value: value
+    key,
+    value
   }))
 }
