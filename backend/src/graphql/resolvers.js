@@ -82,8 +82,8 @@ module.exports = {
 
         return true
       } catch (err) {
-        console.error('API Error Response:', err.response ? err.response.data : err.message);
-        throw new Error('Submit Help Request Failure');
+        console.error('API Error Response:', err.response ? err.response.data : err.message)
+        throw new Error('Submit Help Request Failure')
       }
     }
   }
@@ -94,14 +94,13 @@ function convertArrayToObject (arr) {
     if (isEmpty(value)) return acc
 
     if (Array.isArray(value)) {
-
       // https://learn.microsoft.com/en-us/answers/questions/1517379/upload-multiple-choice-fields-item-in-sharepoint-w
       // add an extra field so mark this specific key field an array of strings
       acc[`${key}@odata.type`] = 'Collection(Edm.String)'
     }
-  
+
     acc[key] = value
-  
+
     return acc
   }, {})
 }
