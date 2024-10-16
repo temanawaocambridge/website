@@ -1,10 +1,11 @@
 const { gql } = require('apollo-server-express')
 
 module.exports = gql`
-  input GetHelpRequestInput {
-    firstName: String!
-    lastName: String
-    email: String!
+  scalar CustomField
+
+  input FieldInput {
+    key: ID!
+    value: CustomField
   }
 
   interface Field {
@@ -63,6 +64,6 @@ module.exports = gql`
   }
 
   type Mutation {
-    submitGetHelpRequest(fields: GetHelpRequestInput): Boolean
+    submitGetHelpRequest(fields: [FieldInput]): Boolean
   }
 `

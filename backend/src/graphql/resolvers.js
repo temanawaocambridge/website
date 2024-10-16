@@ -1,6 +1,7 @@
 require('dotenv').config()
 const axios = require('axios')
 const getAccessToken = require('../services/get-access-token')
+const CustomField = require('graphql-custom-field')
 
 const SITE_ID = process.env.SITE_ID
 const LIST_ID = process.env.LIST_ID
@@ -13,6 +14,7 @@ function getHeaders (accessToken) {
 }
 
 module.exports = {
+  CustomField,
   Query: {
     test: () => true,
     async getHelpRequestFields () {
@@ -68,11 +70,7 @@ module.exports = {
       const accessToken = await getAccessToken()
 
       const listItemData = {
-        fields: {
-          FirstName: fields.firstName,
-          LastName: fields.lastName,
-          Email: fields.email
-        }
+        fields: convertArrayToObject(fields)
       }
 
       const graphUrl = `https://graph.microsoft.com/v1.0/sites/${SITE_ID}/lists/${LIST_ID}/items`
@@ -84,9 +82,34 @@ module.exports = {
 
         return true
       } catch (err) {
-        console.log(err.response.data.error)
-        throw new Error('Submit Help Request Failure')
+        console.error('API Error Response:', err.response ? err.response.data : err.message);
+        throw new Error('Submit Help Request Failure');
       }
     }
   }
+}
+
+function convertArrayToObject (arr) {
+  return arr.reduce((acc, { key, value }) => {
+    if (isEmpty(value)) return acc
+
+    if (Array.isArray(value)) {
+
+      // https://learn.microsoft.com/en-us/answers/questions/1517379/upload-multiple-choice-fields-item-in-sharepoint-w
+      // add an extra field so mark this specific key field an array of strings
+      acc[`${key}@odata.type`] = 'Collection(Edm.String)'
+    }
+  
+    acc[key] = value
+  
+    return acc
+  }, {})
+}
+
+function isEmpty (value) {
+  return (
+    value === undefined ||
+    value === null ||
+    (Array.isArray(value) && value.length === 0)
+  )
 }
