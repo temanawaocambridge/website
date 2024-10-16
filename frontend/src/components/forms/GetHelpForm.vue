@@ -1,5 +1,5 @@
 <template>
-  <v-sheet max-width="500px" class="mx-auto justify-center text-center">
+  <v-sheet max-width="500px" class="mx-auto justify-center text-center" style="padding-top: 60px;">
     <h2>Request Help from Te Manawa o Cambridge</h2>
     <br>
     <h5 class="font-weight-medium">

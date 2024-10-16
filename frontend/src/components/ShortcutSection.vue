@@ -4,22 +4,25 @@
       <template v-for="(option, i) in items" :key="i">
         <v-col
           cols="12"
-          md="auto"
+          sm="4"
+          md="4"
+          class="d-flex justify-center"
         >
           <v-hover v-slot="{ isHovering, props }">
             <v-card
-              :class="{ 'on-hover': isHovering }"
-              :elevation="isHovering ? 5 : 0"
+              :class="{ 'on-hover': isHovering && !option.disabled, 'no-pointer': option.disabled }"
+              :elevation="isHovering && !option.disabled ? 5 : 0"
               color="#D3D3D3"
+              :ripple="!option.disabled"
               v-bind="props"
-              width="240px"
+              :width="$vuetify.display.mdAndUp ? '340px' : '100%'"
               height="350px"
               variant="outlined"
               @click="navigateTo(option.link)"
             >
               <v-img
                 :src="option.img"
-                width="240px"
+                :width="$vuetify.display.mdAndUp ? '340px' : '100%'"
                 height="240px"
                 cover
                 class="d-flex align-end"
@@ -61,21 +64,25 @@ export default {
         title: 'Volunteer',
         description: 'Join us in making a difference in our community.',
         keywords: 'volunteer, help, support, giving back',
+        disabled: true
       },
       {
         title: 'Contact Us',
         description: 'Have questions? We’re here to listen.',
         keywords: 'family contact center',
+        disabled: true
       },
       {
         title: 'Our Services',
         description: 'Discover the support available for you.',
         keywords: 'community services, how we help',
+        disabled: true
       },
       {
         title: 'Our Partners',
         description: 'Meet the organizations we work with.',
         keywords: 'collaboration, business, support, community engagement, work together',
+        disabled: true
       },
       // {
       //   title: 'Become a Partner',
@@ -117,4 +124,7 @@ export default {
   color: #333; /* Adjust color for your text overlay */
 }
 
+.no-pointer {
+  cursor: not-allowed;
+}
 </style>
