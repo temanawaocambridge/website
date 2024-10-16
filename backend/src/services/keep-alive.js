@@ -9,12 +9,12 @@ const keepServerAlive = () => {
   console.log('Starting keep alive service')
   setInterval(async () => {
     try {
-      const response = await axios.get(`${url}/health`)
+      const response = await axios.get(`${url}`)
       console.log(`Health check: ${response.status} - ${response.data}`)
     } catch (error) {
       console.error('Health check error:', error.message)
     }
-  }, 25 * 60 * 1000) // Ping every 25 minutes
+  }, 14 * 60 * 1000) // Ping every 14 minutes
 }
 
 module.exports = keepServerAlive
