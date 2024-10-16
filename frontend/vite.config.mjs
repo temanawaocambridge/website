@@ -4,6 +4,7 @@ import Vue from '@vitejs/plugin-vue'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import ViteFonts from 'unplugin-fonts/vite'
 import VueDevTools from 'vite-plugin-vue-devtools'
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 // Utilities
 import { defineConfig } from 'vite'
@@ -26,7 +27,15 @@ export default defineConfig({
         }]
       }
     }),
-    VueDevTools()
+    VueDevTools(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: '404.html', // Source file to copy
+          dest: '' // Destination in the dist directory
+        }
+      ]
+    })
   ],
   define: { 'process.env': {} },
   resolve: {
