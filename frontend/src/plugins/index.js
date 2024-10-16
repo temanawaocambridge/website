@@ -1,6 +1,5 @@
 // import { provideApolloClient } from '@vue/apollo-composable'
 
-
 // Plugins
 import vuetify from './vuetify'
 // import apolloClient from './vue-apollo'

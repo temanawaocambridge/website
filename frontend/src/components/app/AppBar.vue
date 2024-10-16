@@ -3,7 +3,8 @@
     <!-- Logo and title -->
     <template #title>
       <div
-        class="d-inline-flex align-center my-5"
+        @click="goHome"
+        class="d-inline-flex align-center my-5 clickable"
         :class="[$vuetify.display.smAndDown ? 'text-h6' : 'text-h4', 'text-primary']"
       >
         <v-img
@@ -63,8 +64,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useGoTo } from 'vuetify';
+import { ref } from 'vue'
+import { useGoTo } from 'vuetify'
+import { useRouter } from 'vue-router'
 
 const drawer = ref(false);
 const menu = [
@@ -78,6 +80,7 @@ const menu = [
   // 'Donate',
 ];
 
+const router = useRouter();
 const goTo = useGoTo();
 
 function scrollToSection(section) {
@@ -86,8 +89,14 @@ function scrollToSection(section) {
     goTo(element, { offset: -64 }); // Adjust offset if needed
   }
 }
+
+function goHome () {
+  router.push('/');
+}
 </script>
 
 <style>
-/* Add styles as needed */
+.clickable {
+  cursor: pointer;
+}
 </style>

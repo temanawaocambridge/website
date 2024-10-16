@@ -1,79 +1,77 @@
 <template>
-  <v-sheet class="mx-auto" width="500">
-    <v-form v-model="valid" fast-fail @submit.prevent>
-      <!-- Section 1: Contact Information -->
-      <h3>Contact Information</h3>
-      <v-text-field
-        v-model="formData.firstName"
-        required
-        :rules="rules"
-        label="First name"
-      ></v-text-field>
+  <v-sheet max-width="500px" class="mx-auto justify-center text-center">
+    <h2>Request Help from Te Manawa o Cambridge</h2>
+    <br>
+    <h5 class="font-weight-medium">
+      We understand that life can get tough sometimes. If you or your family need assistance, please fill out this form. We're here to support you.
+    </h5>
+    <br>
+    <br>
 
-      <v-text-field
-        v-model="formData.lastName"
-        label="Last name"
-      ></v-text-field>
+    <!-- Conditionally render the form or the success message -->
+    <div v-if="!submitted">
+      <v-form v-model="valid" fast-fail @submit.prevent="submit">
+        <!-- Dynamically render fields based on the fetched data -->
+        <div v-for="field in formFields" :key="field.key" class="mb-4">
+          <!-- text field -->
+          <div v-if="field.type === 'text'">
+            <h3 v-if="field.key === 'FirstName'" class="pb-3">Contact Information</h3>
+            <v-text-field
+              :label="field.displayName"
+              v-model="formData[field.key]"
+              :required="field.required"
+              :rules="field.required ? [v => !!v || `${field.displayName} is required`] : []"
+              hide-details
+            />
+          </div>
 
-      <v-text-field
-        v-model="formData.email"
-        required
-        :rules="rules"
-        label="Email"
-      ></v-text-field>
+          <div v-else-if="field.type === 'checkbox'">
+            <h3>{{ field.displayName }}</h3>
+            <v-checkbox
+              v-for="option in field.choices"
+              :key="option"
+              v-model="formData[field.key]"
+              :label="option"
+              :value="option"
+              hide-details
+              density="compact"
+              :required="field.required"
+              :rules="field.required ? [v => !!v || `${field.displayName} is required`] : []"
+            />
+          </div>
 
-      <v-text-field
-        v-model="formData.phone"
-        label="Phone"
-        type="tel"
-      ></v-text-field>
+          <div v-else-if="field.type === 'textarea'">
+            <v-textarea
+              v-model="formData[field.key]"
+              :label="field.description"
+              lines="3"
+              :required="field.required"
+              :rules="field.required ? [v => !!v || `${field.displayName} is required`] : []"
+              hide-details
+            />
+          </div>
+        </div>
 
-      <!-- Section 2: Assistance Needs -->
-      <h3>Assistance Needs</h3>
-      <v-checkbox-group v-model="formData.assistanceNeeded" required>
-        <v-checkbox label="Financial Support" value="financial"></v-checkbox>
-        <v-checkbox label="Food Assistance" value="food"></v-checkbox>
-        <v-checkbox label="Mental Health Support" value="mentalHealth"></v-checkbox>
-        <v-checkbox label="Housing Assistance" value="housing"></v-checkbox>
-        <v-checkbox label="Other" value="other"></v-checkbox>
-      </v-checkbox-group>
-      <v-textarea
-        v-model="formData.issueDescription"
-        label="Description of issue"
-        required
-      ></v-textarea>
+        <v-btn :disabled="!valid" :loading="loading" class="mt-4" type="submit" variant="outlined" block>
+          Send Request
+        </v-btn>
+      </v-form>
+    </div>
 
-      <!-- Section 3: Additional Information -->
-      <h3>Additional Information</h3>
-      <v-checkbox v-model="formData.preferredContactMethod" label="Email" value="email"></v-checkbox>
-      <v-checkbox v-model="formData.preferredContactMethod" label="Phone" value="phone"></v-checkbox>
-      <v-checkbox v-model="formData.preferredContactMethod" label="Text" value="text"></v-checkbox>
+    <!-- Success message and options -->
+    <div v-else>
+      <h2 class="mb-10">{{ successMessage }}</h2>
+      <v-btn @click="goToHome" class="ma-4" variant="outlined">Go to Home Page</v-btn>
+      <v-btn @click="resetForm" class="ma-4" variant="outlined">Make Another Submission</v-btn>
+    </div>
 
-      <v-radio-group v-model="formData.bestTimeToContact" required>
-        <v-radio label="Morning" value="morning"></v-radio>
-        <v-radio label="Afternoon" value="afternoon"></v-radio>
-        <v-radio label="Evening" value="evening"></v-radio>
-        <v-radio label="Other" value="other"></v-radio>
-      </v-radio-group>
-
-      <v-radio-group v-model="formData.urgency" required>
-        <v-radio label="Immediate" value="immediate"></v-radio>
-        <v-radio label="Within a week" value="withinAWeek"></v-radio>
-        <v-radio label="Not urgent" value="notUrgent"></v-radio>
-        <v-radio label="Other" value="other"></v-radio>
-      </v-radio-group>
-
-      <!-- Section 4: Privacy and Consent -->
-      <h3>Privacy and Consent</h3>
-      <v-radio-group v-model="formData.consent" required>
-        <v-radio label="Yes" value="yes"></v-radio>
-        <v-radio label="No" value="no"></v-radio>
-        <v-radio label="Maybe" value="maybe"></v-radio>
-        <v-radio label="Other" value="other"></v-radio>
-      </v-radio-group>
-
-      <v-btn :disabled="!valid" class="mt-4" type="submit" variant="outlined" block @click="submit">Submit</v-btn>
-    </v-form>
+    <!-- Snackbar for success message -->
+    <v-snackbar v-model="snackbar" timeout="3000" color="success">
+      {{ successMessage }}
+      <template v-slot:action="{ attrs }">
+        <v-btn text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+      </template>
+    </v-snackbar>
   </v-sheet>
 </template>
 
@@ -81,28 +79,79 @@
 import { mapActions } from 'vuex';
 
 export default {
-  data: () => ({
-    valid: false,
-    formData: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      assistanceNeeded: [],
-      issueDescription: '',
-      preferredContactMethod: [],
-      bestTimeToContact: '',
-      urgency: '',
-      consent: '',
-    },
-    rules: [v => !!v || 'Required']
-  }),
+  data() {
+    return {
+      formReady: false,
+      valid: false,
+      loading: false,
+      submitted: false, // New property to track submission status
+      formFields: [], // Form fields fetched from the action
+      formData: {}, // Holds form data dynamically generated from fields
+      snackbar: false, // Controls snackbar visibility
+      successMessage: '' // Holds the success message
+    };
+  },
   methods: {
-    ...mapActions('getHelpForm', ['submitGetHelpRequest']),
+    ...mapActions('getHelpForm', ['getHelpRequestFields', 'submitGetHelpRequest']),
+
+    async loadFormFields() {
+      try {
+        const fields = await this.getHelpRequestFields();
+        this.formFields = fields;
+        this.initializeFormData();
+      } catch (error) {
+        console.error('Error loading form fields:', error);
+      }
+    },
+
+    isCheckboxOrRadio(field) {
+      return field.type === 'checkbox' && field.choices;
+    },
+
+    initializeFormData() {
+      this.formFields.forEach(field => {
+        if (field.type === 'boolean') {
+          this.formData[field.key] = false;
+        } else if (field.type === 'checkbox') {
+          this.formData[field.key] = [];
+        } else {
+          this.formData[field.key] = '';
+        }
+      });
+      this.formReady = true;
+    },
+
     async submit() {
       if (!this.valid) return;
-      return this.submitGetHelpRequest(this.formData);
+      this.loading = true;
+      try {
+        await this.submitGetHelpRequest(this.formData);
+
+        this.successMessage = 'Your request has been submitted successfully!';
+        this.snackbar = true;
+        this.submitted = true; // Set submitted to true to hide the form
+        this.loading = false;
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        this.loading = false;
+      }
+    },
+
+    goToHome() {
+      // Implement the logic to navigate to the home page
+      this.$router.push('/'); // Adjust the route according to your application's structure
+    },
+
+    resetForm() {
+      this.formData = {};
+      this.valid = false;
+      this.submitted = false; // Reset the submitted status to show the form again
+      this.initializeFormData(); // Reinitialize the form data
     }
+  },
+  async created() {
+    // Fetch form fields when the component is created
+    await this.loadFormFields();
   }
-}
+};
 </script>
