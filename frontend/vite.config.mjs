@@ -16,7 +16,6 @@ export default defineConfig({
     Vue({
       template: { transformAssetUrls }
     }),
-    // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
     Vuetify(),
     Components(),
     ViteFonts({
@@ -48,8 +47,15 @@ export default defineConfig({
     port: 3000
   },
   optimizeDeps: {
-    include: ['pexels']
+    include: [
+      'pexels',
+      // '@apollo/client/core',
+      // '@apollo/client/cache'
+    ],
   },
+  // rollupInputOptions: {
+    // external: ['react']
+  // },
   build: {
     commonjsOptions: {
       transformMixedEsModules: true
