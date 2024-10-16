@@ -1,7 +1,7 @@
 const express = require('express')
 const { ApolloServer } = require('apollo-server-express')
+const cors = require('cors') // Enable CORS
 // const helmet = require('helmet') // Security middleware
-// const cors = require('cors') // Enable CORS
 // const bodyParser = require('body-parser')
 
 // GraphQL type definitions and resolvers
@@ -9,13 +9,33 @@ const typeDefs = require('./graphql/typeDefs')
 const resolvers = require('./graphql/resolvers')
 
 // Create an instance of ApolloServer
-const server = new ApolloServer({ typeDefs, resolvers })
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  persistedQueries: false
+})
 
 const app = express()
 
-// Add middleware (security, CORS, body parsing)
+// Set up CORS to allow requests from both your production website and localhost (for development)
+const allowedOrigins = ['https://temanawaocambridge.org.nz', `http://localhost:${process.env.PORT}`]
+
+const corsOptions = {
+  origin: function (origin, cb) {
+    // Allow requests with no origin (like mobile apps, curl, Postman, etc.) or from allowed domains
+    if (!origin || allowedOrigins.includes(origin)) {
+      cb(null, true)
+    } else {
+      cb(new Error('Not allowed by CORS'))
+    }
+  },
+  credentials: true // This allows cookies and other credentials to be sent from the client
+}
+
+app.use(cors(corsOptions)) // Apply CORS middleware
+
+// Add additional middleware (security, body parsing)
 // app.use(helmet())
-// app.use(cors())
 // app.use(bodyParser.json())
 
 async function startApolloServer () {
