@@ -4,9 +4,17 @@ import { GET_HELP_REQUEST_FIELDS } from './query'
 
 export default {
   namespaced: true,
-  state: {},
-  getters: {},
-  mutations: {},
+  state: {
+    getHelpFields: []
+  },
+  getters: {
+    getHelpFields: state => state.getHelpFields
+  },
+  mutations: {
+    setGetHelpFields (state, getHelpFields) {
+      state.getHelpFields = getHelpFields
+    }
+  },
   actions: {
     async getHelpRequestFields (_) {
       try {
@@ -32,6 +40,11 @@ export default {
         console.error('Error submitting get help request:', error)
         throw new Error('Could not submit get help request')
       }
+    },
+    async populateGetHelpForm ({ dispatch, commit }) {
+      const fields = await dispatch('getHelpRequestFields')
+      console.log(fields)
+      commit('setGetHelpFields', fields)
     }
   }
 }

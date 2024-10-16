@@ -26,11 +26,16 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   data() {
     return {
       contentHeight: '0px'
     };
+  },
+  async created() {
+    await this.populateGetHelpForm()
   },
   mounted() {
     this.calculateHeight();
@@ -40,6 +45,7 @@ export default {
     window.removeEventListener('resize', this.calculateHeight);
   },
   methods: {
+    ...mapActions('getHelpForm', ['populateGetHelpForm']),
     calculateHeight () {
       const appBarHeight = this.$refs.appBar.$el.offsetHeight;
       const appFooterHeight = this.$refs.appFooter.$el.offsetHeight;

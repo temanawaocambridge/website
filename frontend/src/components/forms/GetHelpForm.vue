@@ -12,7 +12,7 @@
     <div v-if="!submitted">
       <v-form v-model="valid" fast-fail @submit.prevent="submit">
         <!-- Dynamically render fields based on the fetched data -->
-        <div v-for="field in formFields" :key="field.key" class="mb-4">
+        <div v-for="field in getHelpFields" :key="field.key" class="mb-4">
           <!-- text field -->
           <div v-if="field.type === 'text'">
             <h3 v-if="field.key === 'FirstName'" class="pb-3">Contact Information</h3>
@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   data() {
@@ -85,31 +85,23 @@ export default {
       valid: false,
       loading: false,
       submitted: false, // New property to track submission status
-      formFields: [], // Form fields fetched from the action
       formData: {}, // Holds form data dynamically generated from fields
       snackbar: false, // Controls snackbar visibility
       successMessage: '' // Holds the success message
     };
   },
+  computed: {
+    ...mapGetters('getHelpForm', ['getHelpFields'])
+  },
   methods: {
-    ...mapActions('getHelpForm', ['getHelpRequestFields', 'submitGetHelpRequest']),
-
-    async loadFormFields() {
-      try {
-        const fields = await this.getHelpRequestFields();
-        this.formFields = fields;
-        this.initializeFormData();
-      } catch (error) {
-        console.error('Error loading form fields:', error);
-      }
-    },
+    ...mapActions('getHelpForm', ['submitGetHelpRequest']),
 
     isCheckboxOrRadio(field) {
       return field.type === 'checkbox' && field.choices;
     },
 
     initializeFormData() {
-      this.formFields.forEach(field => {
+      this.getHelpFields.forEach(field => {
         if (field.type === 'boolean') {
           this.formData[field.key] = false;
         } else if (field.type === 'checkbox') {
@@ -148,10 +140,6 @@ export default {
       this.submitted = false; // Reset the submitted status to show the form again
       this.initializeFormData(); // Reinitialize the form data
     }
-  },
-  async created() {
-    // Fetch form fields when the component is created
-    await this.loadFormFields();
   }
-};
+}
 </script>
