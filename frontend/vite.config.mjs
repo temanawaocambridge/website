@@ -49,13 +49,8 @@ export default defineConfig({
   optimizeDeps: {
     include: [
       'pexels'
-      // '@apollo/client/core',
-      // '@apollo/client/cache'
     ]
   },
-  // rollupInputOptions: {
-  // external: ['react']
-  // },
   build: {
     commonjsOptions: {
       transformMixedEsModules: true

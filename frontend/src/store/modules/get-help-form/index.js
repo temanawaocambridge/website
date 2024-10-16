@@ -1,6 +1,9 @@
 import apolloClient from '@/plugins/apollo'
 import { SUBMIT_GET_HELP_REQUEST } from './mutation'
+<<<<<<< HEAD
 import { GET_HELP_REQUEST_FIELDS } from './query'
+=======
+>>>>>>> origin/main
 
 export default {
   namespaced: true,
