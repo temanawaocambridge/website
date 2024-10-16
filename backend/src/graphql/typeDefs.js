@@ -64,6 +64,6 @@ module.exports = gql`
   }
 
   type Mutation {
-    submitGetHelpRequest(fields: [FieldInput]): Boolean
+    submitGetHelpRequest(fields: [FieldInput] recaptchaToken: String!): Boolean
   }
 `

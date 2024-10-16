@@ -28,11 +28,16 @@ export default {
         throw new Error('Could not get the help request field')
       }
     },
-    async submitGetHelpRequest (_, fields) {
+    async submitGetHelpRequest ({ dispatch }, fields) {
       try {
+        const recaptchaToken = await dispatch('generateRecaptchaToken')
+
         const { data } = await apolloClient.mutate({
           mutation: SUBMIT_GET_HELP_REQUEST,
-          variables: { fields: convertObjectToArray(fields) }
+          variables: {
+            fields: convertObjectToArray(fields),
+            recaptchaToken
+          }
         })
 
         return data.submitGetHelpRequest
@@ -41,9 +46,21 @@ export default {
         throw new Error('Could not submit get help request')
       }
     },
+    async generateRecaptchaToken() {
+      return new Promise((resolve, reject) => {
+        grecaptcha.ready(async () => {
+          try {
+            const token = await grecaptcha.execute(import.meta.env.VITE_RECAPTCHA_SITE_KEY, { action: 'submit' });
+            resolve(token);
+          } catch (error) {
+            console.error('Error generating reCAPTCHA token:', error);
+            reject(error);
+          }
+        });
+      });
+    },
     async populateGetHelpForm ({ dispatch, commit }) {
       const fields = await dispatch('getHelpRequestFields')
-      console.log(fields)
       commit('setGetHelpFields', fields)
     }
   }

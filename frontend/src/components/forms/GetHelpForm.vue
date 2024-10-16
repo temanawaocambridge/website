@@ -96,11 +96,11 @@ export default {
   methods: {
     ...mapActions('getHelpForm', ['submitGetHelpRequest']),
 
-    isCheckboxOrRadio(field) {
+    isCheckboxOrRadio (field) {
       return field.type === 'checkbox' && field.choices;
     },
 
-    initializeFormData() {
+    initializeFormData () {
       this.getHelpFields.forEach(field => {
         if (field.type === 'boolean') {
           this.formData[field.key] = false;
@@ -113,11 +113,11 @@ export default {
       this.formReady = true;
     },
 
-    async submit() {
+    async submit () {
       if (!this.valid) return;
       this.loading = true;
       try {
-        await this.submitGetHelpRequest(this.formData);
+        await this.submitGetHelpRequest(this.formData)
 
         this.successMessage = 'Your request has been submitted successfully!';
         this.snackbar = true;

@@ -13,6 +13,7 @@
   "description": "",
   "dependencies": {
     "@azure/msal-node": "^2.15.0",
+    "@google-cloud/recaptcha-enterprise": "^5.11.0",
     "@microsoft/microsoft-graph-client": "^3.0.7",
     "apollo-server-express": "^3.13.0",
     "axios": "^1.7.7",
