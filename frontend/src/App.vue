@@ -4,7 +4,11 @@
 
     <v-main>
       <v-container fluid class="pa-0">
-        <router-view />
+        <router-view v-slot="{ Component }">
+          <transition name="fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
         <!-- Uncomment additional sections as needed -->
         <!-- <WhatWeDoSection /> -->
         <!-- <DiscoverHelp /> -->
@@ -63,4 +67,17 @@ export default {
 section[id] {
   scroll-margin-top: 63px; /* Adjust this value according to your app-bar height */
 }
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.15s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
+}
+
 </style>

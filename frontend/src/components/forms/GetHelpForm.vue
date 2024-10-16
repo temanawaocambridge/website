@@ -1,78 +1,76 @@
 <template>
-  <v-sheet max-width="500px" class="mx-auto justify-center text-center" style="padding-top: 60px;">
-    <h2>Request Help from Te Manawa o Cambridge</h2>
-    <br>
-    <h5 class="font-weight-medium">
-      We understand that life can get tough sometimes. If you or your family need assistance, please fill out this form. We're here to support you.
-    </h5>
-    <br>
-    <br>
+  <PageLayout
+    pageTitle="Request Help from Te Manawa o Cambridge"
+    pageSubTitle="We understand that life can get tough sometimes. If you or your family need assistance, please fill out this form. We're here to support you."
+    headerKeywords="family support"
+    maxWidth="600px"
+  >
+      <!-- Conditionally render the form or the success message -->
+      <div v-if="!submitted">
+        <v-form v-model="valid" fast-fail @submit.prevent="submit">
+          <!-- Dynamically render fields based on the fetched data -->
+          <div v-for="field in getHelpFields" :key="field.key" class="mb-4">
+            <!-- text field -->
+            <div v-if="field.type === 'text'">
+              <h3 v-if="field.key === 'FirstName'" class="pb-3">Contact Information</h3>
+              <v-text-field
+                :label="field.displayName"
+                v-model="formData[field.key]"
+                :required="field.required"
+                :rules="field.required ? [v => !!v || `${field.displayName} is required`] : []"
+                hide-details
+              />
+            </div>
 
-    <!-- Conditionally render the form or the success message -->
-    <div v-if="!submitted">
-      <v-form v-model="valid" fast-fail @submit.prevent="submit">
-        <!-- Dynamically render fields based on the fetched data -->
-        <div v-for="field in getHelpFields" :key="field.key" class="mb-4">
-          <!-- text field -->
-          <div v-if="field.type === 'text'">
-            <h3 v-if="field.key === 'FirstName'" class="pb-3">Contact Information</h3>
-            <v-text-field
-              :label="field.displayName"
-              v-model="formData[field.key]"
-              :required="field.required"
-              :rules="field.required ? [v => !!v || `${field.displayName} is required`] : []"
-              hide-details
-            />
+            <div v-else-if="field.type === 'checkbox'">
+              <h3>{{ field.displayName }}</h3>
+              <v-checkbox
+                v-for="option in field.choices"
+                :key="option"
+                v-model="formData[field.key]"
+                :label="option"
+                :value="option"
+                hide-details
+                density="compact"
+                :required="field.required"
+                :rules="field.required ? [v => !!v || `${field.displayName} is required`] : []"
+              />
+            </div>
+
+            <div v-else-if="field.type === 'textarea'">
+              <v-textarea
+                v-model="formData[field.key]"
+                :label="field.description"
+                lines="3"
+                :required="field.required"
+                :rules="field.required ? [v => !!v || `${field.displayName} is required`] : []"
+                hide-details
+              />
+            </div>
           </div>
 
-          <div v-else-if="field.type === 'checkbox'">
-            <h3>{{ field.displayName }}</h3>
-            <v-checkbox
-              v-for="option in field.choices"
-              :key="option"
-              v-model="formData[field.key]"
-              :label="option"
-              :value="option"
-              hide-details
-              density="compact"
-              :required="field.required"
-              :rules="field.required ? [v => !!v || `${field.displayName} is required`] : []"
-            />
-          </div>
+          <v-btn :disabled="!valid" :loading="loading" class="mt-4" type="submit" variant="outlined" block>
+            Send Request
+          </v-btn>
+        </v-form>
+      </div>
 
-          <div v-else-if="field.type === 'textarea'">
-            <v-textarea
-              v-model="formData[field.key]"
-              :label="field.description"
-              lines="3"
-              :required="field.required"
-              :rules="field.required ? [v => !!v || `${field.displayName} is required`] : []"
-              hide-details
-            />
-          </div>
-        </div>
+      <!-- Success message and options -->
+      <div v-else>
+        <h2 class="mb-10">{{ successMessage }}</h2>
+        <v-btn @click="goToHome" class="ma-4" variant="outlined">Go to Home Page</v-btn>
+        <v-btn @click="resetForm" class="ma-4" variant="outlined">Make Another Submission</v-btn>
+      </div>
 
-        <v-btn :disabled="!valid" :loading="loading" class="mt-4" type="submit" variant="outlined" block>
-          Send Request
-        </v-btn>
-      </v-form>
-    </div>
-
-    <!-- Success message and options -->
-    <div v-else>
-      <h2 class="mb-10">{{ successMessage }}</h2>
-      <v-btn @click="goToHome" class="ma-4" variant="outlined">Go to Home Page</v-btn>
-      <v-btn @click="resetForm" class="ma-4" variant="outlined">Make Another Submission</v-btn>
-    </div>
-
-    <!-- Snackbar for success message -->
-    <v-snackbar v-model="snackbar" timeout="3000" color="success">
-      {{ successMessage }}
-      <template v-slot:action="{ attrs }">
-        <v-btn text v-bind="attrs" @click="snackbar = false">Close</v-btn>
-      </template>
-    </v-snackbar>
-  </v-sheet>
+      <!-- Snackbar for success message -->
+      <v-snackbar v-model="snackbar" timeout="3000" color="success">
+        {{ successMessage }}
+        <template v-slot:action="{ attrs }">
+          <v-btn text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+        </template>
+      </v-snackbar>
+    <!-- </v-sheet> -->
+  </PageLayout>
 </template>
 
 <script>

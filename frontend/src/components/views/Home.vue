@@ -1,6 +1,6 @@
 <template>
-  <v-container fluid>
+  <PageLayout>
     <Cover />
-    <ShortcutSection/>
-  </v-container>
+    <ShortcutSection />
+  </PageLayout>
 </template>

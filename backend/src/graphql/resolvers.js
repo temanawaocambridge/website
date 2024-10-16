@@ -28,10 +28,10 @@ module.exports = {
           headers: getHeaders(accessToken)
         });
 
-        return res.data.value.filter(field => !field.readOnly && field.description);
+        return res.data.value.filter(field => !field.readOnly && field.description)
       } catch (error) {
         console.error('Error fetching list fields:', error);
-        throw new Error('Could not retrieve list fields');
+        return []
       }
     }
   },
@@ -70,7 +70,8 @@ module.exports = {
       const recaptchaVerification = await verifyRecaptcha(recaptchaToken)
       
       if (!recaptchaVerification) {
-        throw new Error('reCAPTCHA verification failed');
+        console.error('reCAPTCHA verification failed')
+        return false
       }
       // if (score === null || score < 0.5) {
       //   throw new Error('reCAPTCHA validation failed.')
@@ -92,7 +93,7 @@ module.exports = {
         return true;
       } catch (err) {
         console.error('API Error Response:', err.response ? err.response.data : err.message)
-        throw new Error('Submit Help Request Failure')
+        return false
       }
     }
   }
