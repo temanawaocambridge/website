@@ -12,7 +12,7 @@ app.get('/health', (_, res) => {
 })
 
 const url = process.env.NODE_ENV === 'production'
-  ? `${process.env.PRODUCTION_BACKEND_URL}/graphql`
+  ? process.env.PRODUCTION_BACKEND_URL
   : `http//localhost:${PORT}/graphql`
 
 app.listen(PORT, () => {
