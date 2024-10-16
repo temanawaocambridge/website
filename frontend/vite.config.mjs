@@ -48,13 +48,13 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: [
-      'pexels',
+      'pexels'
       // '@apollo/client/core',
       // '@apollo/client/cache'
-    ],
+    ]
   },
   // rollupInputOptions: {
-    // external: ['react']
+  // external: ['react']
   // },
   build: {
     commonjsOptions: {
