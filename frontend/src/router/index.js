@@ -19,6 +19,10 @@ const routes = [
     path: '/get-help',
     name: 'GetHelp',
     component: GetHelpForm
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/'
   }
   // {
   //   path: '/volunteer',
