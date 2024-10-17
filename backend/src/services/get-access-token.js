@@ -18,7 +18,7 @@ async function getAccessToken () {
       tokenExpirationTime = Date.now() + (authResult.expiresIn * 1000) // Use expiresIn from authResult
     } catch (error) {
       console.error('Error acquiring access token:', error)
-      throw new Error('Could not get access token')
+      return null
     }
   }
 

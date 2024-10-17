@@ -20,6 +20,7 @@ module.exports = {
     test: () => true,
     async getHelpRequestFields() {
       const accessToken = await getAccessToken()
+      if (!accessToken) return [] // TODO; default
 
       const graphUrl = `https://graph.microsoft.com/v1.0/sites/${SITE_ID}/lists/${LIST_ID}/columns`
 
@@ -78,6 +79,11 @@ module.exports = {
       // }
       
       const accessToken = await getAccessToken()
+
+      if (!accessToken) {
+        console.error('access token failed')
+        return false
+      }
 
       const listItemData = {
         fields: convertArrayToObject(fields)
