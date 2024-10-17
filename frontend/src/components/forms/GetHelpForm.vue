@@ -1,9 +1,10 @@
 <template>
   <PageLayout
-    pageTitle="Request Help from Te Manawa o Cambridge"
-    pageSubTitle="We understand that life can get tough sometimes. If you or your family need assistance, please fill out this form. We're here to support you."
+    title="Request Help from Te Manawa o Cambridge"
+    subtitle="We understand that life can get tough sometimes. If you or your family need assistance, please fill out this form. We're here to support you."
     headerKeywords="family support"
     maxWidth="600px"
+    route="/get-help"
   >
       <!-- Conditionally render the form or the success message -->
       <div v-if="!submitted">

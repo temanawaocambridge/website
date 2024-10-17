@@ -13,12 +13,14 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: { breadcrumb: 'Home' }
   },
   {
     path: '/get-help',
     name: 'GetHelp',
-    component: GetHelpForm
+    component: GetHelpForm,
+    meta: { breadcrumb: 'Get Help Form' }
   },
   {
     path: '/:catchAll(.*)',
@@ -34,7 +36,11 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    // Scroll to the top of the page
+    return { top: 0 };
+  }
 })
 
 export default router

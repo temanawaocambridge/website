@@ -1,6 +1,6 @@
 <template>
   <v-container fluid :style="contentStyle">
-    <v-breadcrumbs v-if="breadcrumbs" :items="breadcrumbs" class="mb-4" />
+    <Breadcrumbs v-if="!isHomePage" :title="title" :route="route"/>
 
     <v-img
       v-if="header"
@@ -11,12 +11,12 @@
       class="d-flex align-end"
     />
     
-    <h2 v-if="pageTitle" class="page-header justify-center text-center pt-3">
-      {{ pageTitle }}
+    <h2 v-if="title" class="page-header justify-center text-center pt-3">
+      {{ title }}
     </h2>
 
-    <h5 v-if="pageSubTitle" class="font-weight-medium px-3 justify-center text-center">
-        {{ pageSubTitle }}
+    <h5 v-if="subtitle" class="font-weight-medium px-3 justify-center text-center">
+        {{ subtitle }}
     </h5>
     <div :class="contentClass">
       <slot />
@@ -25,11 +25,13 @@
 </template>
 
 <script>
+import { useRoute } from 'vue-router'
+
 export default {
   props: {
-    breadcrumbs: Array,
-    pageTitle: String,
-    pageSubTitle: String,
+    title: String,
+    subtitle: String,
+    route: String,
     headerKeywords: String,
     maxWidth: String
   },
@@ -58,6 +60,10 @@ export default {
     },
     isMobile () {
       return this.$vuetify.display.smAndDown
+    },
+    isHomePage() {
+      const route = useRoute()
+      return route.path === '/'
     }
   },
   methods: {
