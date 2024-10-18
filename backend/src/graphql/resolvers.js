@@ -19,23 +19,47 @@ module.exports = {
   Query: {
     test: () => true,
     async getHelpRequestFields() {
-      const accessToken = await getAccessToken()
-      if (!accessToken) return [] // TODO; default
-
-      const graphUrl = `https://graph.microsoft.com/v1.0/sites/${SITE_ID}/lists/${LIST_ID}/columns`
-
+      const accessToken = await getAccessToken();
+      if (!accessToken) {
+        console.error('No access token found');
+        return [];
+      }
+    
+      const graphUrl = `https://graph.microsoft.com/v1.0/sites/${SITE_ID}/lists/${LIST_ID}/columns`;
+    
       try {
         const res = await axios.get(graphUrl, {
           headers: getHeaders(accessToken)
         });
-
-        return res.data.value.filter(field => !field.readOnly && field.description)
+    
+        if (res.data && res.data.value) {
+          return res.data.value.filter(field => !field.readOnly && field.description);
+        } else {
+          console.error('Unexpected response format:', res);
+          return [];
+        }
+    
       } catch (error) {
-        console.error('Error fetching list fields:', error);
-        return []
+        if (error.response) {
+          const { status } = error.response;
+    
+          if (status === 401) {
+            console.error('Unauthorized access - possible invalid token:', error.response.data);
+          } else if (status === 403) {
+            console.error('Forbidden - insufficient permissions:', error.response.data);
+          } else {
+            console.error(`Error fetching list fields (status: ${status}):`, error.response.data);
+          }
+        } else if (error.request) {
+          console.error('No response received from Microsoft Graph API:', error.request);
+        } else {
+          console.error('Error setting up the request:', error.message);
+        }
+    
+        return [];
       }
-    }
-  },
+    },
+  },    
   Field: {
     key: (field) => field.name,
     __resolveType(field) {
