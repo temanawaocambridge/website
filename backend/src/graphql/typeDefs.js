@@ -60,10 +60,12 @@ module.exports = gql`
 
   type Query {
     test: Boolean
-    getHelpRequestFields: [Field]
+    getHelpForm: [Field]
+    getContactForm: [Field]
   }
 
   type Mutation {
-    submitGetHelpRequest(fields: [FieldInput] recaptchaToken: String!): Boolean
+    submitHelpRequest(fields: [FieldInput] recaptchaToken: String!): Boolean
+    submitContactRequest(fields: [FieldInput] recaptchaToken: String!): Boolean
   }
 `

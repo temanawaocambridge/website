@@ -13,7 +13,8 @@
     "start-all": "concurrently \"npm run start-frontend\" \"npm run start-backend\"",
     "lint": "standard --fix",
     "build": "npm --prefix frontend run build",
-    "deploy": "npm --prefix frontend run deploy"
+    "deploy": "npm --prefix frontend run deploy",
+    "dev": "npm run start-frontend && npm run start-backend"
   },
   "devDependencies": {
     "concurrently": "^8.0.1"

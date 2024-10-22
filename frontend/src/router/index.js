@@ -2,10 +2,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 // views
-import Home from '@/components/views/Home.vue' // Import your components
+import Home from '@/components/views/Home.vue'
 
 // forms
-import GetHelpForm from '@/components/forms/GetHelpForm.vue' // Import the Get Help component
+import GetHelpForm from '@/components/forms/GetHelpForm.vue'
+import ContactForm from '@/components/forms/ContactForm.vue'
+
 // import Volunteer from '@/components/Volunteer.vue' // Import the Volunteer component
 // Import other components as needed
 
@@ -17,10 +19,16 @@ const routes = [
     meta: { breadcrumb: 'Home' }
   },
   {
-    path: '/get-help',
+    path: '/help',
     name: 'GetHelp',
     component: GetHelpForm,
     meta: { breadcrumb: 'Get Help Form' }
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: ContactForm,
+    meta: { breadcrumb: 'Contact Us Form' }
   },
   {
     path: '/:catchAll(.*)',

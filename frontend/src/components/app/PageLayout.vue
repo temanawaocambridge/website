@@ -1,6 +1,6 @@
 <template>
   <v-container fluid :style="contentStyle">
-    <Breadcrumbs v-if="!isHomePage" :title="title" :route="route"/>
+    <Breadcrumbs v-if="!isHomePage && title && route" :title="title" :route="route"/>
 
     <v-img
       v-if="header"

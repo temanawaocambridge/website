@@ -9,19 +9,6 @@
             <component :is="Component" />
           </transition>
         </router-view>
-        <!-- Uncomment additional sections as needed -->
-        <!-- <WhatWeDoSection /> -->
-        <!-- <DiscoverHelp /> -->
-        <!-- <CustomizeSection /> -->
-        <!-- <FunFactsSection /> -->
-        <!-- <WhatPeopleSaySection /> -->
-        <!-- <OurPortfolioSection /> -->
-        <!-- <MeetOurTeamSection /> -->
-        <!-- <AwardWinningSection /> -->
-        <!-- <AmazingFeaturesSection /> -->
-        <!-- <DonationSection id="donate" /> -->
-        <!-- <FAQSection /> -->
-        <!-- <ContactUsSection /> -->
       </v-container>
     </v-main>
 
@@ -38,22 +25,22 @@ export default {
       contentHeight: '0px'
     };
   },
-  async created() {
-    await this.populateGetHelpForm()
+  async created () {
+    await this.populateForms()
   },
-  mounted() {
+  mounted () {
     this.calculateHeight();
-    window.addEventListener('resize', this.calculateHeight);
+    window.addEventListener('resize', this.calculateHeight)
   },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.calculateHeight);
+  beforeDestroy () {
+    window.removeEventListener('resize', this.calculateHeight)
   },
   methods: {
-    ...mapActions('getHelpForm', ['populateGetHelpForm']),
+    ...mapActions('forms', ['populateForms']),
     calculateHeight () {
-      const appBarHeight = this.$refs.appBar.$el.offsetHeight;
-      const appFooterHeight = this.$refs.appFooter.$el.offsetHeight;
-      this.contentHeight = `calc(100vh - ${appBarHeight + appFooterHeight}px)`;
+      const appBarHeight = this.$refs.appBar.$el.offsetHeight
+      const appFooterHeight = this.$refs.appFooter.$el.offsetHeight
+      this.contentHeight = `calc(100vh - ${appBarHeight + appFooterHeight}px)`
     }
   }
 }

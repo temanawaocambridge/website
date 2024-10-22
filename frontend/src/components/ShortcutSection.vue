@@ -59,32 +59,32 @@ export default {
         title: 'Get Help',
         description: 'Reach out for support and guidance.',
         keywords: 'family support',
-        link: '/get-help',
+        link: '/help',
       },
-      {
-        title: 'Volunteer',
-        description: 'Join us in making a difference in our community.',
-        keywords: 'volunteer, help, support, giving back',
-        disabled: true
-      },
+      // {
+      //   title: 'Volunteer',
+      //   description: 'Join us in making a difference in our community.',
+      //   keywords: 'volunteer, help, support, giving back',
+      //   disabled: true
+      // },
       {
         title: 'Contact Us',
         description: 'Have questions? We’re here to listen.',
         keywords: 'family contact center',
-        disabled: true
+        link: '/contact'
       },
-      {
-        title: 'Our Services',
-        description: 'Discover the support available for you.',
-        keywords: 'community services, how we help',
-        disabled: true
-      },
-      {
-        title: 'Our Partners',
-        description: 'Meet the organizations we work with.',
-        keywords: 'collaboration, business, support, community engagement, work together',
-        disabled: true
-      },
+      // {
+      //   title: 'Our Services',
+      //   description: 'Discover the support available for you.',
+      //   keywords: 'community services, how we help',
+      //   disabled: true
+      // },
+      // {
+      //   title: 'Our Partners',
+      //   description: 'Meet the organizations we work with.',
+      //   keywords: 'collaboration, business, support, community engagement, work together',
+      //   disabled: true
+      // },
       // {
       //   title: 'Become a Partner',
       //   description: 'Partner with us to strengthen our community',

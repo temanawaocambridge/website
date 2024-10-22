@@ -1,12 +1,12 @@
 import { createStore } from 'vuex'
 
-import getHelpForm from './modules/get-help-form'
+import forms from './modules/forms'
 import pexels from './modules/pexels'
 
 
 const store = createStore({
   modules: {
-    getHelpForm,
+    forms,
     pexels
   }
 })

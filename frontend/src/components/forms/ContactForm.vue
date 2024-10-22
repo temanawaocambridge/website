@@ -1,13 +1,12 @@
 <template>
   <v-container>
     <FormLayout
-
-      title="Request Help from Te Manawa o Cambridge"
-      subtitle="We understand that life can get tough sometimes. If you or your family need assistance, please fill out this form. We're here to support you."
-      route="/help"
-      :formFields="helpForm"
-      :submitAction="submitHelpRequest"
-      keywords="family support"
+      title="Contact Us"
+      subtitle="We're here to listen and help. Reach out with any questions, feedback, or support requests—our team is ready to assist you."
+      route="/contact"
+      :formFields="contactForm"
+      :submitAction="submitContactRequest"
+      keywords="family contact center"
     />
     <PageLayout>
       <v-row class="justify-left">
@@ -34,10 +33,10 @@ import PageLayout from '../app/PageLayout.vue';
 
 export default {
   computed: {
-    ...mapGetters('forms', ['helpForm'])
+    ...mapGetters('forms', ['contactForm'])
   },
   methods: {
-    ...mapActions('forms', ['submitHelpRequest'])
+    ...mapActions('forms', ['submitContactRequest'])
   }
 }
 </script>
